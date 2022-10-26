@@ -9,43 +9,27 @@ import javafx.scene.paint.Color;
 public class ShapesModel {
     int x;
     int y;
-    private final ObjectProperty<Color> color;
+    Color color;
+    int size;
+    ShapeType shape;
 
-    StringProperty size;
-    public String getSize() {
-        return size.get();
+    public ShapesModel(int x, int y, Color color, int size, ShapeType shape) {
+        //fixa default color, size
+            this.x = x;
+            this.y = y;
+        if (color!=null)
+            this.color = color;
+        else
+            this.color = Color.BLACK;
+        this.size = size;
+        this.shape = shape;
     }
-
-    public void size(String size) {
-        this.size.set(size);
-    }
-    public StringProperty sizeProperty() {
-        return size;
-    }
-    public ObjectProperty<Color> colorProperty() {
-        return color;
-    }
-    public ShapesModel() {
-        this.color = new SimpleObjectProperty<>(Color.BLACK);
-        size = new SimpleStringProperty();
-    }
-
-
-    public ShapeType getType() {
-        return type;
-    }
-
-    public void Type(ShapeType type) {
-        this.type = type;
-    }
-
-    ShapeType type;
 
     public int getX() {
         return x;
     }
 
-    public void X(int x) {
+    public void setX(int x) {
         this.x = x;
     }
 
@@ -53,7 +37,29 @@ public class ShapesModel {
         return y;
     }
 
-    public void Y(int y) {
+    public void setY(int y) {
         this.y = y;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    public void setSize(int size){
+        this.size = size;
+    }
+    public int getSize(){
+        return size;
+    }
+
+    public ShapeType getShape() {
+        return shape;
+    }
+
+    public void setShape(ShapeType shape) {
+        this.shape = shape;
     }
 }
