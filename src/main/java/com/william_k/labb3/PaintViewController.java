@@ -1,7 +1,5 @@
 package com.william_k.labb3;
 
-import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
@@ -9,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -26,11 +23,11 @@ public class PaintViewController {
     public void initialize(){
         context = canvas.getGraphicsContext2D();
     }
-    public void circleButton(ActionEvent actionEvent) {
+    public void circleButton() {
         shapeType = CIRCLE;
     }
 
-    public void rectangleButton(ActionEvent actionEvent) {
+    public void rectangleButton() {
         shapeType = SQUARE;
     }
     public void canvasClick(MouseEvent mouseEvent) {

@@ -15,8 +15,8 @@ public class ShapesModel {
 
     public ShapesModel(int x, int y, Color color, int size, ShapeType shape) {
         //fixa default color, size
-            this.x = x;
-            this.y = y;
+            this.x = x-size/2;
+            this.y = y-size/2;
         if (color!=null)
             this.color = color;
         else
