@@ -1,4 +1,5 @@
 package com.william_k.labb3;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public abstract class Shape {
@@ -35,6 +36,9 @@ public abstract class Shape {
     }
     public int getSize(){
         return size;
+    }
+    public void draw(GraphicsContext context){
+
     }
 
     @Override

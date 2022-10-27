@@ -8,8 +8,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.util.ArrayList;
-
 import static com.william_k.labb3.ShapeType.CIRCLE;
 import static com.william_k.labb3.ShapeType.SQUARE;
 /*todo
@@ -25,6 +23,8 @@ public class PaintViewController {
     ShapeType shapeType;
     public void initialize(){
         context = canvas.getGraphicsContext2D();
+        shapeSize.textProperty().bindBidirectional(shapesModel.sizeProperty());
+        colorPicker.valueProperty().bindBidirectional(shapesModel.colorProperty());
     }
     public void circleButton() {
         shapesModel.setShapeType(CIRCLE);
@@ -34,28 +34,14 @@ public class PaintViewController {
         shapesModel.setShapeType(SQUARE);
     }
     public void canvasClick(MouseEvent mouseEvent) {
-
-        if (shapesModel.getShapeType()==CIRCLE) {
-            Shape temp = new Circle((int) mouseEvent.getX(), (int) mouseEvent.getY(), colorPicker.getValue(), Integer.parseInt(shapeSize.getText()));
-            shapesModel.addShape(temp);
-        }
-        if (shapesModel.getShapeType()==SQUARE) {
-            Shape temp = new Square((int) mouseEvent.getX(), (int) mouseEvent.getY(), colorPicker.getValue(), Integer.parseInt(shapeSize.getText()));
-            shapesModel.addShape(temp);
-        }
+        shapesModel.addCircle(mouseEvent);
+        shapesModel.addSquare(mouseEvent);
         render();
     }
     public void render(){
         context.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-
         for (int i = 0; i < shapesModel.getShapes().size(); i++) {
-            context.setFill(shapesModel.getShapes().get(i).getColor());
-            if(shapesModel.getShapes().get(i) instanceof Circle){
-                context.fillOval(shapesModel.getShapes().get(i).x, shapesModel.getShapes().get(i).y, shapesModel.getShapes().get(i).getSize(), shapesModel.getShapes().get(i).getSize());
-            }
-            if (shapesModel.getShapes().get(i) instanceof Square){
-                context.fillRect(shapesModel.getShapes().get(i).x, shapesModel.getShapes().get(i).y, shapesModel.getShapes().get(i).getSize(), shapesModel.getShapes().get(i).getSize());
-            }
+            shapesModel.draw(context);
         }
     }
     public void keyPressed(KeyEvent keyEvent) {

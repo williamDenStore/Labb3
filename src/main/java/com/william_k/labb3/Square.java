@@ -1,5 +1,6 @@
 package com.william_k.labb3;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Square extends Shape{
@@ -13,5 +14,9 @@ public class Square extends Shape{
         this.size = size;
     }
     public void withinArea(){
+    }
+    public void draw(GraphicsContext graphicsContext){
+        graphicsContext.setFill(color);
+        graphicsContext.fillRect(x,y,size,size);
     }
 }

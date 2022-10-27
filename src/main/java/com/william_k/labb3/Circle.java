@@ -1,5 +1,6 @@
 package com.william_k.labb3;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Circle extends Shape{
@@ -11,6 +12,10 @@ public class Circle extends Shape{
         else
             this.color = Color.BLACK;
         this.size = size;
+    }
+    public void draw(GraphicsContext graphicsContext){
+        graphicsContext.setFill(color);
+        graphicsContext.fillOval(x,y,size,size);
     }
 
 }
