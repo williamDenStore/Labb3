@@ -6,9 +6,6 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-import static com.william_k.labb3.ShapeType.CIRCLE;
-import static com.william_k.labb3.ShapeType.SQUARE;
-
 public class ShapesModel {
     private StringProperty sizeText;
     private ObjectProperty color;
@@ -36,13 +33,13 @@ public class ShapesModel {
         return shapes;
     }
     public void addCircle(MouseEvent mouseEvent) {
-        if (shapeType==CIRCLE) {
+        if (shapeType==ShapeType.CIRCLE) {
             Shape temp = new Circle((int) mouseEvent.getX(), (int) mouseEvent.getY(), (Color) color.get(), Integer.parseInt(sizeText.getValue()));
             addShape(temp);
         }
     }
     public void addSquare(MouseEvent mouseEvent) {
-        if (shapeType==SQUARE) {
+        if (shapeType==ShapeType.SQUARE) {
             Shape temp = new Square((int) mouseEvent.getX(), (int) mouseEvent.getY(), (Color) color.get(), Integer.parseInt(sizeText.getValue()));
             addShape(temp);
         }

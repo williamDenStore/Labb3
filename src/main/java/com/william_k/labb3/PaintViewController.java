@@ -7,9 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-
-import static com.william_k.labb3.ShapeType.CIRCLE;
-import static com.william_k.labb3.ShapeType.SQUARE;
 /*todo
 *  läsa ner det till svg fil
 *  2 tester
@@ -27,11 +24,11 @@ public class PaintViewController {
         colorPicker.valueProperty().bindBidirectional(shapesModel.colorProperty());
     }
     public void circleButton() {
-        shapesModel.setShapeType(CIRCLE);
+        shapesModel.setShapeType(ShapeType.CIRCLE);
     }
 
     public void rectangleButton() {
-        shapesModel.setShapeType(SQUARE);
+        shapesModel.setShapeType(ShapeType.SQUARE);
     }
     public void canvasClick(MouseEvent mouseEvent) {
         shapesModel.addCircle(mouseEvent);
