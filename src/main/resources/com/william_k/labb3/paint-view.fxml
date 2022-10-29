@@ -48,6 +48,10 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </Button>
+            <Button mnemonicParsing="false" onAction="#edit" text="edit">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin></Button>
             </children>
         </HBox>
         <Pane layoutY="64.0" prefHeight="438.0" prefWidth="800.0">

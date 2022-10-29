@@ -40,6 +40,11 @@ public abstract class Shape {
     public void draw(GraphicsContext context){
 
     }
+    public boolean pointInside(int xClick, int yClick){
+        return false;
+    }
+    public void updatePos(){
+    }
 
     @Override
     public String toString() {

@@ -4,19 +4,29 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Square extends Shape{
+    int xCenter;
+    int yCenter;
     public Square(int x, int y, Color color, int size) {
-        this.x = x-size/2;
-        this.y = y-size/2;
+        this.x = x;
+        this.y = y;
+        xCenter = x-size/2;
+        yCenter = y-size/2;
         if (color!=null)
             this.color = color;
         else
             this.color = Color.BLACK;
         this.size = size;
     }
-    public void withinArea(){
+    public void updatePos(){
+        xCenter = x-size/2;
+        yCenter = y-size/2;
     }
-    public void draw(GraphicsContext graphicsContext){
+    public boolean pointInside(int xClick, int yClick){
+
+        return xClick <= xCenter+size && xClick >= xCenter && yClick <= yCenter+size && yClick >= yCenter;
+    }
+    public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(color);
-        graphicsContext.fillRect(x,y,size,size);
+        graphicsContext.fillRect(xCenter, yCenter, size, size);
     }
 }
