@@ -3,6 +3,8 @@ package com.william_k.labb3;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.util.Objects;
+
 public class Circle extends Shape{
     int xCenter;
     int yCenter;
@@ -11,10 +13,7 @@ public class Circle extends Shape{
         this.y = y;
         xCenter = x-size/2;
         yCenter = y-size/2;
-        if (color!=null)
-            this.color = color;
-        else
-            this.color = Color.BLACK;
+        this.color = Objects.requireNonNullElse(color, Color.BLACK);
         this.size = size;
     }
     public void updatePos(){

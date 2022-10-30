@@ -9,9 +9,18 @@ import java.util.ArrayList;
 public class ShapesModel {
     private StringProperty sizeText;
     private ObjectProperty color;
-    Boolean edit = false;
-    ArrayList<Shape> shapes = new ArrayList<>();
+
+
+
+    private Boolean edit = false;
+    private ArrayList<Shape> shapes = new ArrayList<>();
     ShapeType shapeType;
+    public void setEdit(Boolean edit) {
+        this.edit = edit;
+    }
+    public Boolean getEdit() {
+        return edit;
+    }
     public StringProperty sizeProperty() {
         return sizeText;
     }
@@ -56,9 +65,6 @@ public class ShapesModel {
         }
         return -1;
     }
-    public ShapeType getShapeType() {
-        return shapeType;
-    }
 
     public void draw(GraphicsContext context) {
         shapes.forEach(shape->shape.draw(context));
@@ -68,7 +74,6 @@ public class ShapesModel {
             addShape(mouseEvent);
         if (edit){
             int i = getIndexOfShapeInCoordinate((int) mouseEvent.getX(), (int) mouseEvent.getY());
-            int size = Integer.parseInt(sizeText.getValue());
             if (i!=-1) {
                 shapes.get(i).setColor((Color) color.get());
                 shapes.get(i).setSize(Integer.parseInt(sizeText.getValue()));
