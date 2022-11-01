@@ -1,6 +1,7 @@
 package com.william_k.labb3;
 
 
+import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /*todo
 *  läsa ner det till svg fil
@@ -18,6 +20,13 @@ public class PaintViewController {
     public GraphicsContext context;
     public ColorPicker colorPicker;
     public TextField shapeSize;
+
+    private Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     ShapesModel shapesModel = new ShapesModel();
     public void initialize(){
         context = canvas.getGraphicsContext2D();
@@ -49,5 +58,9 @@ public class PaintViewController {
     }
     public void edit() {
         shapesModel.setEdit(!shapesModel.getEdit());
+    }
+
+    public void save(ActionEvent actionEvent) {
+        shapesModel.save(canvas, stage);
     }
 }

@@ -43,7 +43,7 @@
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin></TextField>
-            <Button mnemonicParsing="false" text="Save">
+            <Button mnemonicParsing="false" text="Save" onAction="#save">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>

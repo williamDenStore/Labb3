@@ -1,8 +1,10 @@
 package com.william_k.labb3;
 import javafx.beans.property.*;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -81,5 +83,10 @@ public class ShapesModel {
             }
         }
 
+    }
+
+    public void save(Canvas canvas, Stage stage) {
+        SaveImage saveImage = new SaveImage(shapes,canvas,stage);
+        saveImage.saveFile();
     }
 }
