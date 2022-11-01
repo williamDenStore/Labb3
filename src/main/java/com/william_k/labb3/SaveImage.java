@@ -20,10 +20,6 @@ public class SaveImage {
         this.canvas = canvas;
         this.shapes = shapes;
     }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
     public void saveFile(){
         try {
             PrintStream fileStream = new PrintStream(fileChooser());
@@ -43,11 +39,7 @@ public class SaveImage {
 
     private void saveShapes(PrintStream fileStream) {
         for (int i = 0; i < shapes.size(); i++) {
-            if(shapes.get(i).getClass().equals(Circle.class)){
-                fileStream.println("\t<circle r=\""+shapes.get(i).size/2+"\" cx=\""+shapes.get(i).x+"\" cy=\""+shapes.get(i).y+"\" fill=\"#"+formatColor(shapes,i)+"\"/>");
-            }
-            if(shapes.get(i).getClass().equals(Square.class))
-                fileStream.println("\t<rect width=\""+ shapes.get(i).size+"\" height=\""+ shapes.get(i).size+"\" x=\""+ shapes.get(i).x+"\" y=\""+ shapes.get(i).y+"\" fill=\"#"+formatColor(shapes, i)+"\"/>");
+            fileStream.println(shapes.get(i).convertToSvg());
         }
     }
     private File fileChooser(){
@@ -58,14 +50,5 @@ public class SaveImage {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("SVG","*.svg"));
         File file = fileChooser.showSaveDialog(stage);
         return file;
-    }
-
-    private StringBuilder formatColor(ArrayList<Shape> shapes, int i) {
-        StringBuilder color = new StringBuilder(shapes.get(i).color.toString());
-        color.deleteCharAt(9);
-        color.deleteCharAt(8);
-        color.deleteCharAt(1);
-        color.deleteCharAt(0);
-        return color;
     }
 }

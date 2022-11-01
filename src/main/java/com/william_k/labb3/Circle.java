@@ -29,5 +29,7 @@ public class Circle extends Shape{
         int radius = size/2;
         return Math.pow((xClick-(x)),2) + Math.pow((yClick-(y)),2) < Math.pow((radius),2);
     }
-
+    public String convertToSvg(){
+        return "\t<circle r=\""+size/2+"\" cx=\""+x+"\" cy=\""+y+"\" fill=\"#"+formatColor()+"\"/>";
+    }
 }

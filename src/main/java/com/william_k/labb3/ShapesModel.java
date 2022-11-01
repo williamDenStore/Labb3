@@ -44,14 +44,7 @@ public class ShapesModel {
         return shapes;
     }
     public void addShape(MouseEvent mouseEvent) {
-        if (shapeType==ShapeType.CIRCLE) {
-            Shape temp = new Circle((int) mouseEvent.getX(), (int) mouseEvent.getY(), (Color) color.get(), Integer.parseInt(sizeText.getValue()));
-            addShape(temp);
-        }
-        if (shapeType==ShapeType.SQUARE) {
-            Shape temp = new Square((int) mouseEvent.getX(), (int) mouseEvent.getY(), (Color) color.get(), Integer.parseInt(sizeText.getValue()));
-            addShape(temp);
-        }
+        shapes.add(Shape.createShape(shapeType, mouseEvent, (Color) color.get(), Integer.parseInt(sizeText.getValue())));
     }
 
     public void removeLastShape() {

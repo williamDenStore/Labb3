@@ -27,4 +27,7 @@ public class Square extends Shape{
         graphicsContext.setFill(color);
         graphicsContext.fillRect(xCenter, yCenter, size, size);
     }
+    public String convertToSvg(){
+        return "\t<rect width=\""+size+"\" height=\""+size+"\" x=\""+x+"\" y=\""+y+"\" fill=\"#"+formatColor()+"\"/>";
+    }
 }
