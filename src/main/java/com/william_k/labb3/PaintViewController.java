@@ -52,7 +52,7 @@ public class PaintViewController {
     }
     public void keyPressed(KeyEvent keyEvent) {
         if (keyEvent.isControlDown() && keyEvent.getCode() == KeyCode.Z ) {
-            shapesModel.removeLastShape();
+            shapesModel.removeLastCommand();
             render();
         }
     }
@@ -60,7 +60,7 @@ public class PaintViewController {
         shapesModel.setEdit(!shapesModel.getEdit());
     }
 
-    public void save(ActionEvent actionEvent) {
+    public void save() {
         shapesModel.save(canvas, stage);
     }
 }

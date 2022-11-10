@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Square extends Shape{
     int xCenter;
     int yCenter;
+
     public Square(int x, int y, Color color, int size) {
         this.x = x;
         this.y = y;

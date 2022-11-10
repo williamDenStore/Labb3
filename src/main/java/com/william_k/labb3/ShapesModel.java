@@ -6,16 +6,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 
 public class ShapesModel {
-    private StringProperty sizeText;
-    private ObjectProperty color;
-
-
-
+    private final StringProperty sizeText;
+    private final ObjectProperty color;
+    static Deque<Runnable> undoStack = new ArrayDeque<>();
     private Boolean edit = false;
-    private ArrayList<Shape> shapes = new ArrayList<>();
+    private final ArrayList<Shape> shapes = new ArrayList<>();
     ShapeType shapeType;
     public void setEdit(Boolean edit) {
         this.edit = edit;
@@ -36,20 +36,16 @@ public class ShapesModel {
     public void setShapeType(ShapeType shapeType) {
         this.shapeType = shapeType;
     }
-    public void addShape(Shape shape){
-        if(shapeType!=null)
-            shapes.add(shape);
-    }
     public ArrayList<Shape> getShapes() {
         return shapes;
     }
     public void addShape(MouseEvent mouseEvent) {
+        undoStack.push(()-> shapes.remove(shapes.size()-1));
         shapes.add(Shape.createShape(shapeType, mouseEvent, (Color) color.get(), Integer.parseInt(sizeText.getValue())));
     }
-
-    public void removeLastShape() {
-        if (shapes.size()!=0)
-            shapes.remove(shapes.size() - 1);
+    public void removeLastCommand(){
+        Runnable undoToExecute = undoStack.pop();
+        undoToExecute.run();
     }
 
     public int getIndexOfShapeInCoordinate(int x, int y){
@@ -69,8 +65,13 @@ public class ShapesModel {
             addShape(mouseEvent);
         if (edit){
             int i = getIndexOfShapeInCoordinate((int) mouseEvent.getX(), (int) mouseEvent.getY());
-            if (i!=-1) {
+            if (i>=0) {
+                Color oldColor = shapes.get(i).color;
+                undoStack.push(()-> shapes.get(i).setColor(oldColor));
                 shapes.get(i).setColor((Color) color.get());
+
+                int oldSize = shapes.get(i).size;
+                undoStack.push(()-> shapes.get(i).setSize(oldSize));
                 shapes.get(i).setSize(Integer.parseInt(sizeText.getValue()));
                 shapes.get(i).updatePos();
             }

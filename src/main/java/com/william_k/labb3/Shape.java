@@ -1,11 +1,7 @@
 package com.william_k.labb3;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-
-import java.util.ArrayList;
 
 public abstract class Shape {
     int x;

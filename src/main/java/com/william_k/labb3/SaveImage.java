@@ -5,13 +5,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class SaveImage {
-
     public Stage stage;
     public Canvas canvas;
     public ArrayList<Shape> shapes;
@@ -38,8 +36,8 @@ public class SaveImage {
     }
 
     private void saveShapes(PrintStream fileStream) {
-        for (int i = 0; i < shapes.size(); i++) {
-            fileStream.println(shapes.get(i).convertToSvg());
+        for (Shape shape : shapes) {
+            fileStream.println(shape.convertToSvg());
         }
     }
     private File fileChooser(){
@@ -48,7 +46,6 @@ public class SaveImage {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("SVG","*.svg"));
-        File file = fileChooser.showSaveDialog(stage);
-        return file;
+        return fileChooser.showSaveDialog(stage);
     }
 }
