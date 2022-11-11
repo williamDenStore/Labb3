@@ -35,6 +35,7 @@ public class PaintViewController {
     public void canvasClick(MouseEvent mouseEvent) {
         shapesModel.canvasClick(mouseEvent);
         render();
+        canvas.requestFocus();
     }
     public void render(){
         context.clearRect(0,0,canvas.getWidth(),canvas.getHeight());

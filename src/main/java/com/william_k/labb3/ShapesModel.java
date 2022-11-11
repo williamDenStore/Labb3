@@ -46,6 +46,7 @@ public class ShapesModel {
     public void removeLastCommand(){
         Runnable undoToExecute = undoStack.pop();
         undoToExecute.run();
+        shapes.forEach(Shape::updatePos);
     }
 
     public int getIndexOfShapeInCoordinate(int x, int y){
@@ -64,19 +65,32 @@ public class ShapesModel {
         if (!edit)
             addShape(mouseEvent);
         if (edit){
-            int i = getIndexOfShapeInCoordinate((int) mouseEvent.getX(), (int) mouseEvent.getY());
-            if (i>=0) {
-                Color oldColor = shapes.get(i).color;
-                undoStack.push(()-> shapes.get(i).setColor(oldColor));
-                shapes.get(i).setColor((Color) color.get());
-
-                int oldSize = shapes.get(i).size;
-                undoStack.push(()-> shapes.get(i).setSize(oldSize));
-                shapes.get(i).setSize(Integer.parseInt(sizeText.getValue()));
-                shapes.get(i).updatePos();
-            }
+            changeShapeVariables(mouseEvent);
         }
 
+    }
+
+    private void changeShapeVariables(MouseEvent mouseEvent) {
+        int i = getIndexOfShapeInCoordinate((int) mouseEvent.getX(), (int) mouseEvent.getY());
+        if (i>=0) {
+            changeColor(i);
+            changeSize(i);
+            shapes.get(i).updatePos();
+        }
+    }
+
+    private void changeSize(int i) {
+        int oldSize = shapes.get(i).size;
+        shapes.get(i).setSize(Integer.parseInt(sizeText.getValue()));
+        if (oldSize!=shapes.get(i).size)
+            undoStack.push(()-> shapes.get(i).setSize(oldSize));
+    }
+
+    private void changeColor(int i) {
+        Color oldColor = shapes.get(i).color;
+        shapes.get(i).setColor((Color) color.get());
+        if (oldColor!=shapes.get(i).color)
+            undoStack.push(()-> shapes.get(i).setColor(oldColor));
     }
 
     public void save(Canvas canvas, Stage stage) {
